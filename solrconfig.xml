@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+  <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-spatial-\d.*\.jar" />
+  <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
+
+  <luceneMatchVersion>9.2.1</luceneMatchVersion>
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <updateLog/>
+  </updateHandler>
+
+  <spatial>
+    <fieldType name="location" class="solr.LatLonPointSpatialField" geo="true" />
+    <spatialFilterCache class="solr.LRUCache" size="10000" initialSize="1000"/>
+    <spatialQueryCache class="solr.LRUCache" size="10000" initialSize="1000"/>
+    <spatialStrategy name="location" class="solr.SpatialRecursivePrefixTreeStrategy" field="location"/>
+  </spatial>
+
+  <query>
+    <useFilterForSortedQuery>true</useFilterForSortedQuery>
+    <queryResultWindowSize>100</queryResultWindowSize>
+    <queryResultMaxDocsCached>100</queryResultMaxDocsCached>
+    <useColdSearcher>false</useColdSearcher>
+  </query>
+
+  <requestDispatcher handleSelect="true">
+    <requestParsers enableRemoteStreaming="true" multipartUploadLimitInKB="2048000" />
+  </requestDispatcher>
+
+  <requestHandler name="/select" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="df">name</str>
+      <str name="defType">edismax</str>
+    </lst>
+  </requestHandler>
+
+  <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+
+  <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
+    <str name="queryAnalyzerFieldType">text_general</str>
+    <lst name="spellchecker">
+      <str name="name">default</str>
+      <str name="field">name</str>
+      <str name="classname">solr.DirectSolrSpellChecker</str>
+      <str name="distanceMeasure">internal</str>
+      <float name="accuracy">0.5</float>
+      <int name="maxEdits">2</int>
+      <int name="minPrefix">1</int>
+      <int name="maxInspections">5</int>
+      <int name="minQueryLength">4</int>
+      <float name="maxQueryFrequency">0.01</float>
+    </lst>
+  </searchComponent>
+   <searchComponent name="spatial" class="solr.SpatialComponent"/>
+
+  <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
+    <lst name="defaults">
+      <str name="df">name</str>
+      <str name="spellcheck.dictionary">default</str>
+      <str name="spellcheck">on</str>
+      <str name="spellcheck.extendedResults">false</str>
+      <str name="spellcheck.count">5</str>
+    </lst>
+    <arr name="last-components">
+      <str>spellcheck</str>
+    </arr>
+  </requestHandler>
+
+  <admin>
+    <defaultQuery>*:*</defaultQuery>
+  </admin>
+
+  <defaultRequestHandler name="standard" class="solr.SearchHandler" default="true">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+      <str name="df">name</str>
+      <str name="defType">edismax</str>
+    </lst>
+  </defaultRequestHandler>
+
+  <updateRequestProcessorChain name="partial-update">
+    <processor class="solr.AddSchemaFieldsUpdateProcessorFactory">
+      <str name="defaultFieldType">text_general</str>
+      <lst name="fieldMappings">
+        <str name="name">copyField</str>
+        <str name="description">copyField</str>
+        <str name="school">copyField</str>
+        <str name="address">copyField</str>
+        <str name="location">copyField</str>
+      </lst>
+    </processor>
+    <processor class="solr.LogUpdateProcessorFactory" />
+    <processor class="solr.RunUpdateProcessorFactory" />
+  </updateRequestProcessorChain>
+	
+  <types>
+    <!-- Other field type definitions -->
+
+    <fieldType name="location" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" distErrPct="0.025" maxDistErr="0.001" distanceUnits="kilometers" />
+  </types>  
+
+  <requestHandler name="/partial-update" class="solr.UpdateRequestHandler" >
+    <lst name="defaults">
+      <str name="update.chain">partial-update</str>
+    </lst>
+  </requestHandler>
+</config>
