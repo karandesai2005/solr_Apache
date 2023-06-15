@@ -189,16 +189,14 @@
   <p>The solrconfig.xml file in Apache Solr is the main configuration file that controls the behavior and settings of the Solr server. It defines various components and handlers responsible for indexing, searching, and managing the Solr instance.</p>
   
   <h4>solrconfig.xml</h4>
-  <xml><code>
+<xmp>
     <?xml version="1.0" encoding="UTF-8" ?>
     <config>
       <!-- Libraries -->
       <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-spatial-\d.*\.jar" />
       <lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
-
       <!-- Lucene Match Version -->
       <luceneMatchVersion>9.2.1</luceneMatchVersion>
-
       <!-- Update Handler -->
       <updateHandler class="solr.DirectUpdateHandler2">
         <updateLog/>
@@ -211,7 +209,6 @@
         <spatialQueryCache class="solr.LRUCache" size="10000" initialSize="1000"/>
         <spatialStrategy name="location" class="solr.SpatialRecursivePrefixTreeStrategy" field="location"/>
       </spatial>
-
       <!-- Query Settings -->
       <query>
         <useFilterForSortedQuery>true</useFilterForSortedQuery>
@@ -219,12 +216,10 @@
         <queryResultMaxDocsCached>100</queryResultMaxDocsCached>
         <useColdSearcher>false</useColdSearcher>
       </query>
-
       <!-- Request Dispatcher -->
       <requestDispatcher handleSelect="true">
         <requestParsers enableRemoteStreaming="true" multipartUploadLimitInKB="2048000" />
       </requestDispatcher>
-
       <!-- Request Handlers -->
       <requestHandler name="/select" class="solr.SearchHandler">
         <lst name="defaults">
@@ -234,9 +229,7 @@
           <str name="defType">edismax</str>
         </lst>
       </requestHandler>
-
       <requestHandler name="/update" class="solr.UpdateRequestHandler" />
-
       <!-- Search Components -->
       <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
         <!-- Spellchecker Configuration -->
@@ -254,9 +247,7 @@
           <float name="maxQueryFrequency">0.01</float>
         </lst>
       </searchComponent>
-
       <searchComponent name="spatial" class="solr.SpatialComponent"/>
-
       <!-- Request Handlers -->
       <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
         <lst name="defaults">
@@ -270,11 +261,9 @@
           <str>spellcheck</str>
         </arr>
       </requestHandler>
-
       <admin>
         <defaultQuery>*:*</defaultQuery>
       </admin>
-
       <!-- Default Request Handler -->
       <defaultRequestHandler name="standard" class="solr.SearchHandler" default="true">
         <lst name="defaults">
@@ -284,7 +273,6 @@
           <str name="defType">edismax</str>
         </lst>
       </defaultRequestHandler>
-
       <!-- Update Request Processor Chain -->
       <updateRequestProcessorChain name="partial-update">
         <processor class="solr.AddSchemaFieldsUpdateProcessorFactory">
@@ -300,10 +288,8 @@
         <processor class="solr.LogUpdateProcessorFactory" />
         <processor class="solr.RunUpdateProcessorFactory" />
       </updateRequestProcessorChain>
-
       <types>
         <!-- Other field type definitions -->
-
         <fieldType name="location" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" distErrPct="0.025" maxDistErr="0.001" distanceUnits="kilometers" />
       </types>  
 
@@ -313,7 +299,7 @@
         </lst>
       </requestHandler>
     </config>
-  </code></xmp>
+  </xmp>
   </section>
 
   <section id="indexing">
@@ -386,7 +372,84 @@
 
   <section id="search">
     <h2>Search</h2>
-    <p><!-- Your content here --></p>
+    <p>
+      this is the json file we indexed
+      <xmp>
+      [
+	{
+    	"id": 1,
+    	"name": "karan",
+    	"description": "hello my name is karan i am 18",
+    	"school": "sncs",
+    	"address": "newyork",
+    	"location": "51.507400,-0.127800"
+	},
+	{
+    	"id": 2,
+    	"name": "ishaan",
+    	"description": "hello my name is ishaam i am 13",
+    	"school": "sncs",
+    	"address": "london",
+    	"location": "51.507400,-0.127800"
+	},
+	{
+    	"id": 3,
+    	"name": "harsh",
+    	"description": "hello my name is harsh i am 19",
+    	"school": "navkar",
+    	"address": "newjercy",
+    	"location": "40.707937,-74.041602"
+	},
+	{
+    	"id": 4,
+    	"name": "aarsh",
+    	"description": "my name is Aarsh i am 18",
+    	"school": "sas",
+    	"address": "london_4km",
+    	"location": "51.542859,-0.133613"
+	}
+]
+    </xmp>
+  <h4>Example Search Queries in Apache Solr</h4>
+  <p>Here are some example search queries you can use to retrieve data from the indexed documents:</p>
+
+  <ol>
+    <li>
+      <p>Search by name:</p>
+      <pre><code>q=name:karan</code></pre>
+      <p>This query will retrieve documents where the "name" field matches the term "karan".</p>
+    </li>
+
+    <li>
+      <p>Search by description:</p>
+      <pre><code>q=description:hello</code></pre>
+      <p>This query will retrieve documents where the "description" field contains the term "hello".</p>
+    </li>
+
+    <li>
+      <p>Search by school:</p>
+      <pre><code>q=school:sncs</code></pre>
+      <p>This query will retrieve documents where the "school" field matches the term "sncs".</p>
+    </li>
+
+    <li>
+      <p>Search by address:</p>
+      <pre><code>q=address:london</code></pre>
+      <p>This query will retrieve documents where the "address" field matches the term "london".</p>
+    </li>
+
+    <li>
+      <p>Spatial search:</p>
+      <pre><code>q={!geofilt pt=51.507400,-0.127800 sfield=location d=10}</code></pre>
+      <p>This query will retrieve documents within a 10-kilometer radius of the coordinates (51.507400, -0.127800) specified in the "location" field.</p>
+    </li>
+  </ol>
+
+  <p>Note that the queries assume you are searching within the "mycore" Solr core. If you have a different core name, replace "mycore" with the actual name of your core in the query URLs.</p>
+
+  <p>You can customize these queries further based on your specific requirements and the fields you want to search on.</p>
+
+    </p>
   </section>
 </main>
 
