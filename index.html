@@ -5,139 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solr Apache Documentation</title>
   <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-}
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #f1f1f1;
-}
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+      text-align: center;
+    }
 
-nav ul li {
-  display: inline;
-}
+    nav ul li {
+      display: inline;
+    }
 
-nav ul li a {
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  color: #333;
-}
+    nav ul li a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+    }
 
-nav ul li a:hover {
-  background-color: #ddd;
-}
+    nav ul li a:hover {
+      background-color: #ddd;
+    }
 
-main {
-  padding: 20px;
-}
- 
-section {
-  margin-bottom: 20px;
- }
+    main {
+      padding: 20px;
+    }
 
-section {
-  margin-bottom: 20px;
-}
+    section {
+      margin-bottom: 20px;
+    }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
- }
-</style>
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Solr Apache Documentation</h1>
-  </header>
+<header>
+  <h1>Solr Apache Documentation</h1>
+</header>
 
-  <nav>
-    <ul>
-      <li><a href="#introduction">Introduction</a></li>
-      <li><a href="#installation">Installation</a></li>
-      <li><a href="#configuration">Configuration</a></li>
-      <li><a href="#indexing">Indexing</a></li>
-      <li><a href="#search">Search</a></li>
-    </ul>
-  </nav>
+<nav>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#indexing">Indexing</a></li>
+    <li><a href="#search">Search</a></li>
+  </ul>
+</nav>
 
-  <main>
-    <section id="introduction">
-      <h2>Introduction</h2>
-      <p>Apache Solr (stands for Searching On Lucene w/ Replication). Solr is an open-source, enterprise search platform that can be used to index and search large amounts of data. It is built on top of Apache Lucene, a popular full-text search library. Solr provides several features that make it a powerful tool for search and analytics, including:
-Flexible schema: Solr allows you to define your schema, making it easy to index and search different data types.
-Scalability: Solr can be scaled to handle large amounts of data.
-High availability: Solr is designed to be highly available, so your search applications will be up and running even if there are problems with individual servers.
-Performance: Solr is very fast so you can search large datasets quickly.
-Ease of use: Solr is easy to use and manage.
-Solr is used by a wide variety of organizations, including:
-E-commerce websites: Solr can be used to index product catalogs, so customers can easily search for products. Here  In e-commerce, Solr is used to index product data, such as product names, descriptions, prices, and images. This allows users to search for products by keyword, category, price, or other criteria. Solr also supports faceting, which allows users to filter search results by different criteria, such as brand, color, or size.
-News websites: Solr can be used to index articles, so readers can easily find the information they are looking for.
-Government agencies: Solr can be used to index documents, so citizens can easily find information about government programs and services.
-Businesses: Solr can be used to index customer data, so businesses can better understand their customers and target them with marketing campaigns.
-→ Here are a few companies that were known to use Apache Solr as of September 2021:
-1. Netflix: Netflix has been a long-time user of Solr for various search and recommendation functionalities within its streaming platform.
-2. Apple: Apple has utilized Solr in its support communities to power search and facilitate efficient retrieval of relevant information.
-3. eBay: eBay has employed Solr to power search and navigation features on its online marketplace, enabling users to find and explore products efficiently.
-4. Zillow: Zillow, a prominent real estate marketplace, has utilized Solr to power its search functionality, allowing users to find properties and relevant information.
-5. Instagram: Instagram, a popular social media platform, has utilized Solr for search and retrieval functionalities, enabling users to find posts, users, and relevant content.
-</p>
-</section>
+<main>
+  <section id="introduction">
+    <h2>Introduction</h2>
+     <p>(stands for Searching On Lucene w/ Replication). Solr is an open-source, enterprise search platform that can be used to index and search large amounts of data. It is built on top of Apache Lucene, which is a popular full-text search library. Solr provides several features that make it a powerful tool for search and analytics, including:</p>
+  <ul>
+    <li>Flexible schema: Solr allows you to define your schema, making it easy to index and search different data types.</li>
+    <li>Scalability: Solr can be scaled to handle large amounts of data.</li>
+    <li>High availability: Solr is designed to be highly available, so your search applications will be up and running even if there are problems with individual servers.</li>
+    <li>Performance: Solr is very fast so that you can search large datasets quickly.</li>
+    <li>Ease of use: Solr is easy to use and manage.</li>
+  </ul>
+  <p>Solr is used by a wide variety of organizations, including:</p>
+  <ul>
+    <li>E-commerce websites: Solr can be used to index product catalogs, so customers can easily search for products. In e-commerce, Solr is used to index product data, such as product names, descriptions, prices, and images. This allows users to search for products by keyword, category, price, or other criteria. Solr also supports faceting, which allows users to filter search results by different criteria, such as brand, color, or size.</li>
+    <li>News websites: Solr can be used to index articles, so readers can easily find the information they are looking for.</li>
+    <li>Government agencies: Solr can be used to index documents, so citizens can easily find information about government programs and services.</li>
+    <li>Businesses: Solr can be used to index customer data, so businesses can better understand their customers and target them with marketing campaigns.</li>
+  </ul>
+  <p>Here are a few companies that were known to use Apache Solr as of September 2021:</p>
+  <ol>
+    <li>Netflix: Netflix has been a long-time user of Solr for various search and recommendation functionalities within its streaming platform.</li>
+    <li>Apple: Apple has utilized Solr in its support communities to power search and facilitate efficient retrieval of relevant information.</li>
+    <li>eBay: eBay has employed Solr to power search and navigation features on its online marketplace, enabling users to find and explore products efficiently.</li>
+    <li>Zillow: Zillow, a prominent real estate marketplace, has utilized Solr to power its search functionality, allowing users to find properties and relevant information.</li>
+    <li>Instagram: Instagram, a popular social media platform, has utilized Solr for search and retrieval functionalities, enabling users to find posts, users, and relevant content.</li>
+  </ol>
+  <p>So, for example, Solr acts as an index for a book, helping users find specific words or phrases by providing the corresponding page numbers. Similarly, Solr is a search engine that indexes a set of documents (e.g., news articles) and allows users to query Solr to retrieve a set of documents that match their search query.</p>
 
-    <section id="installation">
-      <h2>Installation</h2>
-      <p>Open the terminal in Ubuntu in the sudo version
-Apache Solr 7 required Java 8 or greater to run. Make sure your system fulfills the Java requirements of Apache Solr.
-<pre><code>
+  </section>
 
-sudo apt install openjdk-11-jdk
+  <section id="installation">
+    <h2>Installation</h2>
+    <h1>Installation and Configuration of Apache Solr on Ubuntu</h1>
+  <p>Open the terminal in Ubuntu in the sudo version</p>
+  <p>Apache Solr 7 requires Java 8 or greater to run. Make sure your system fulfills the Java requirements of Apache Solr.</p>
+  <code>sudo apt install openjdk-11-jdk</code>
+  <p>Verify active Java version:</p>
+  <code>java -version</code>
+  <pre>
+    openjdk version "11.0.4" 2019-07-16
+    OpenJDK Runtime Environment (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
+    OpenJDK 64-Bit Server VM (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3, mixed mode, sharing)
+  </pre>
+  <p>Now download the required Solr version from its official site or Mirror. Or simply use the following command to download Apache Solr 9.0.</p>
+  <code>Wget https://dlcdn.apache.org/solr/solr/9.2.1/solr-9.2.1.tgz</code>
+  <p>Now extract the Apache Solr service installer shell script from the downloaded Solr archive file and run the installer using the following commands.</p>
+  <code>tar xzf solr-9.0.0.tgz</code>
+  <p>Step 3 – Start / Stop Solr Service</p>
+  <p>Solr is configured as a service on your system. You can simply use the following commands to Start, Stop and check the status of the Solr service.</p>
+  <code>sudo bin/solr stop</code>
+  <code>sudo bin/solr start</code>
+  <code>sudo bin/solr status</code>
+  <p>Create First Solr Collection</p>
+  <p>After the successful installation of Solr on your system. Create the first collection in Apache Solr using the following command.</p>
+  <code>bin/solr create -c mycore</code>
+  <p>Sample output:</p>
+  <pre>Created new core 'mycol1'</pre>
+  <p>To verify the installation, use the following URL in your browser: <a href="http://localhost:8983/">http://localhost:8983/</a></p>
 
+  </section>
 
-Verify active Java version:
-java -version
-openjdk version "11.0.4" 2019-07-16
-OpenJDK Runtime Environment (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
-OpenJDK 64-Bit Server VM (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3, mixed mode, sharing)
-</code></pre>
-Now download the required Solr version from its official site or Mirror. Or simply use the following command to download Apache Solr 9.0.
-<pre><code>
-Wget https://dlcdn.apache.org/solr/solr/9.2.1/solr-9.2.1.tgz
-</code></pre>
+  <section id="configuration">
+    <h2>Configuration</h2>
+    <p><!-- Your content here --></p>
+  </section>
 
-</p>
-</section>
+  <section id="indexing">
+    <h2>Indexing</h2>
+    <p><!-- Your content here --></p>
+  </section>
 
-    <section id="configuration">
-      <h2>Configuration</h2>
-      <p>Your content here...</p>
-    </section>
+  <section id="search">
+    <h2>Search</h2>
+    <p><!-- Your content here --></p>
+  </section>
+</main>
 
-    <section id="indexing">
-      <h2>Indexing</h2>
-      <p>Your content here...</p>
-    </section>
-
-    <section id="search">
-      <h2>Search</h2>
-      <p>Your content here...</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2023 Solr Apache Documentation. All rights reserved.</p>
-  </footer>
+<footer>
+  <p>&copy; 2023 Solr Apache Documentation. All rights reserved.</p>
+</footer>
 </body>
 </html>
