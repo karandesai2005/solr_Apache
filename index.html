@@ -74,12 +74,47 @@ section {
   <main>
     <section id="introduction">
       <h2>Introduction</h2>
-      <p>Your content here...</p>
+      <p>Apache Solr (stands for Searching On Lucene w/ Replication). Solr is an open-source, enterprise search platform that can be used to index and search large amounts of data. It is built on top of Apache Lucene, which is a popular full-text search library. Solr provides several features that make it a powerful tool for search and analytics, including:
+Flexible schema: Solr allows you to define your schema, which makes it easy to index and search different types of data.
+Scalability: Solr can be scaled to handle large amounts of data.
+High availability: Solr is designed to be highly available, so your search applications will be up and running even if there are problems with individual servers.
+Performance: Solr is very fast, so you can search large datasets quickly.
+Ease of use: Solr is easy to use and manage.
+Solr is used by a wide variety of organizations, including:
+E-commerce websites: Solr can be used to index product catalogs, so customers can easily search for products. Here  In e-commerce, Solr is used to index product data, such as product names, descriptions, prices, and images. This allows users to search for products by keyword, category, price, or other criteria. Solr also supports faceting, which allows users to filter search results by different criteria, such as brand, color, or size.
+News websites: Solr can be used to index articles, so readers can easily find the information they are looking for.
+Government agencies: Solr can be used to index documents, so citizens can easily find information about government programs and services.
+Businesses: Solr can be used to index customer data, so businesses can better understand their customers and target them with marketing campaigns.
+→ Here are a few companies that were known to use Apache Solr as of September 2021:
+1. Netflix: Netflix has been a long-time user of Solr for various search and recommendation functionalities within its streaming platform.
+2. Apple: Apple has utilized Solr in its support communities to power search and facilitate efficient retrieval of relevant information.
+3. eBay: eBay has employed Solr to power search and navigation features on its online marketplace, enabling users to find and explore products efficiently.
+4. Zillow: Zillow, a prominent real estate marketplace, has utilized Solr to power its search functionality, allowing users to find properties and relevant information.
+5. Instagram: Instagram, a popular social media platform, has utilized Solr for search and retrieval functionalities, enabling users to find posts, users, and relevant content.
+</p>
     </section>
 
     <section id="installation">
       <h2>Installation</h2>
-      <p>Your content here...</p>
+      <p>Open the terminal in Ubuntu in the sudo version
+Apache Solr 7 required Java 8 or greater to run. Make sure your system fulfills the Java requirements of Apache Solr.
+<pre><code>
+
+sudo apt install openjdk-11-jdk
+
+
+Verify active Java version:
+java -version
+openjdk version "11.0.4" 2019-07-16
+OpenJDK Runtime Environment (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3)
+OpenJDK 64-Bit Server VM (build 11.0.4+11-post-Ubuntu-1ubuntu218.04.3, mixed mode, sharing)
+</code></pre>
+Now download the required Solr version from its official site or Mirror. Or simply use the following command to download Apache Solr 9.0.
+<pre><code>
+Wget https://dlcdn.apache.org/solr/solr/9.2.1/solr-9.2.1.tgz
+</code></pre>
+
+</p>
     </section>
 
     <section id="configuration">
