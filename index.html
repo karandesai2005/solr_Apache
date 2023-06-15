@@ -138,7 +138,7 @@
     <h2>Configuration</h2>
     <h4>Apache Solr Schema</h4>
   <p>The <code>schema.xml</code> file in Apache Solr defines the schema for indexing and searching data. It specifies the fields, field types, and other configurations for the Solr collection.</p>
-  <pre><code>
+  <xmp><code>
     <?xml version="1.0" encoding="UTF-8" ?>
     <schema name="example" version="1.6">
       <!-- Fields -->
@@ -184,7 +184,7 @@
         <fieldType name="location" class="solr.LatLonPointSpatialField" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" autoIndex="true" />
       </types>
     </schema>
-  </code></pre>
+  </code></xmp>
   </section>
 
   <section id="indexing">
