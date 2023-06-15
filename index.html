@@ -136,7 +136,52 @@
 
   <section id="configuration">
     <h2>Configuration</h2>
-    <p><!-- Your content here --></p>
+    <h4>Apache Solr Schema</h4>
+  <p>The <code>schema.xml</code> file in Apache Solr defines the schema for indexing and searching data. It specifies the fields, field types, and other configurations for the Solr collection.</p>
+  <pre><code><?xml version="1.0" encoding="UTF-8" ?>
+<schema name="example" version="1.6">
+  <!-- Fields -->
+  <fields>
+    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
+    <field name="name" type="text_general" indexed="true" stored="true" />
+    <field name="description" type="text_general" indexed="true" stored="true" />
+    <field name="school" type="text_general" indexed="true" stored="true"/>
+    <field name="address" type="text_general" indexed="true" stored="true"/>
+    <field name="location" type="location" indexed="true" stored="true"/>
+    <dynamicField name="*_coordinate" type="location" indexed="true" stored="true"/>
+    <field name="copyField" type="text_general" indexed="true" stored="true"/>
+  </fields>
+
+  <!-- Unique Key -->
+  <uniqueKey>id</uniqueKey>
+  
+  <!-- Default Search Field -->
+  <defaultSearchField>name</defaultSearchField>
+  
+  <!-- Query Parser -->
+  <solrQueryParser defaultOperator="OR" />
+
+  <!-- Field Types -->
+  <types>
+    <fieldType name="string" class="solr.StrField" />
+    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.StandardTokenizerFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />	
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt"/>
+      </analyzer>
+    </fieldType>
+    <fieldType name="location" class="solr.LatLonPointSpatialField" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" autoIndex="true" />
+  </types>
+</schema></code></pre>
+  <p>This example schema includes fields such as <code>id</code>, <code>name</code>, <code>description</code>, <code>school</code>, <code>address</code>, and <code>location</code>. It also defines the field types and their corresponding analyzers.</p>
+
+  
+    </p>
   </section>
 
   <section id="indexing">
