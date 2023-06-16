@@ -106,6 +106,7 @@
     <li><a href="#configuration">Configuration</a></li>
     <li><a href="#indexing">Indexing</a></li>
     <li><a href="#search">Search</a></li>
+    <li><a href="#Tokenizers">Tokenizers</a></li>
   </ul>
 </nav>
 
@@ -486,6 +487,108 @@
 
     </p>
   </section>
+ <section id="Tokenizers">
+	 Certainly! Here's the HTML code with the provided text added:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solr Apache Documentation</title>
+  <style>
+    /* CSS styles here */
+  </style>
+</head>
+<body>
+<header>
+  <h1>Solr Apache Documentation</h1>
+</header>
+
+<nav>
+  <a href="#" class="menu-toggle">Menu</a>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#indexing">Indexing</a></li>
+    <li><a href="#search">Search</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>SOLR: (stands for Searching On Lucene w/ Replication). Solr is an open-source, enterprise search platform that can be used to index and search large amounts of data. It is built on top of Apache Lucene.</p>
+  </section>
+
+  <section>
+    <h2>Tokenizers in Apache Solr</h2>
+    <p>Tokenizers are tools or libraries used in natural language processing (NLP) to break down text into smaller units called tokens. These tokens can be words, subwords, characters, or any other meaningful subunits, depending on the type of tokenizer used.</p>
+    <p>Tokenization is an essential step in many NLP tasks, such as text classification, named entity recognition, machine translation, and sentiment analysis. By splitting text into tokens, it becomes easier to process and analyze language data.</p>
+    <p>In Apache Solr, tokenizers are components of the text analysis pipeline used for indexing and querying text data. Solr provides various built-in tokenizers that can be configured in the schema.xml file or through the Solr admin interface.</p>
+    <p>Here are some commonly used tokenizers in Solr:</p>
+    <ol>
+      <li>
+        <strong>StandardTokenizer:</strong> This tokenizer divides text into tokens based on word boundaries and punctuation. It follows the Unicode Text Segmentation algorithm and is suitable for most Western languages.
+      </li>
+      <li>
+        <strong>ClassicTokenizer:</strong> Similar to the StandardTokenizer, the ClassicTokenizer tokenizes text based on word boundaries and punctuation. However, it also handles certain language-specific rules, such as splitting "don't" into "do" and "n't".
+      </li>
+      <li>
+        <strong>WhitespaceTokenizer:</strong> This tokenizer splits text into tokens based on whitespace characters. It doesn't handle punctuation or language-specific rules, but it can be useful in specific scenarios where you want to preserve whitespace as a token delimiter.
+      </li>
+      <li>
+        <strong>KeywordTokenizer:</strong> This tokenizer treats the entire input as a single token. It can be useful when you want to index or search for exact phrases or specific terms without any tokenization.
+      </li>
+      <li>
+        <strong>PatternTokenizer:</strong> This tokenizer uses a regular expression pattern to split the text into tokens. You can define custom patterns to match specific token boundaries based on your requirements.
+      </li>
+    </ol>
+    <p>Certainly! Let's take an example to illustrate the usage of tokenizers in Apache Solr.</p>
+    <p>Suppose you have a collection of product descriptions, and you want to index them in Solr to enable searching and retrieval. Here's a simplified schema for our example:</p>
+    <pre>
+      &lt;schema&gt;
+        &lt;fieldType name="text_general" class="solr.TextField" positionIncrementGap="100"&gt;
+          &lt;analyzer&gt;
+            &lt;tokenizer class="solr.StandardTokenizerFactory"/&gt;
+            &lt;filter class="solr.LowerCaseFilterFactory"/&gt;
+            &lt;filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt"/&gt;
+          &lt;/analyzer&gt;
+        &lt;/fieldType&gt;
+
+        &lt;field name="description" type="text_general" indexed="true" stored="true"/&gt;
+      &lt;/schema&gt;
+    </pre>
+    <p>In this schema, we're using the <code>text_general</code> field type, which employs the <code>StandardTokenizer</code> for tokenization. It is followed by the <code>LowerCaseFilter</code> to convert all tokens to lowercase and the <code>StopFilter</code> to remove common English stopwords.</p>
+    <p>Now, let's consider a sample product description: "The latest smartphone features a stunning 6.5-inch display and a powerful quad-core processor."</p>
+    <p>When this description is indexed in Solr, the tokenizer and filters will process the text to generate tokens. The tokens produced after each step of the analysis are as follows:</p>
+    <ol>
+      <li>
+        <strong>Tokenization (StandardTokenizer):</strong>
+        <ul>
+          <li>Tokens: ["The", "latest", "smartphone", "features", "a", "stunning", "6.5-inch", "display", "and", "a", "powerful", "quad-core", "processor"]</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Lowercasing (LowerCaseFilter):</strong>
+        <ul>
+          <li>Tokens: ["the", "latest", "smartphone", "features", "a", "stunning", "6.5-inch", "display", "and", "a", "powerful", "quad-core", "processor"]</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Stopword removal (StopFilter):</strong>
+        <ul>
+          <li>Tokens: ["latest", "smartphone", "features", "stunning", "6.5-inch", "display", "powerful", "quad-core", "processor"]</li>
+        </ul>
+      </li>
+    </ol>
+    <p>After the analysis process, these tokens are stored in the Solr index and can be searched using various queries. For example, if a user searches for "smartphone features," Solr will match documents that contain the tokens "smartphone" and "features" in proximity.</p>
+    <p>This example demonstrates how the tokenizer and filters in Solr's text analysis pipeline can transform the input text into meaningful tokens that are suitable for indexing and searching. By configuring different tokenizers and filters based on your specific requirements, you can customize the tokenization process to enhance the search experience and relevance in your Solr application.</p>
+  
+ </section>
 </main>
 
 <footer>
