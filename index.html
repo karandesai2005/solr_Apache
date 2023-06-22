@@ -86,8 +86,7 @@
     <li><a href="#indexing">Indexing</a></li>
     <li><a href="#search">Search</a></li>
     <li><a href="#Tokenizers">Tokenizers</a></li>
-  </ul>
-</nav>
+    <li><a href="Odata">odata</a></li>
 
 <main>
   <section id="introduction">
@@ -467,7 +466,6 @@
     </p>
   </section>
  <section id="Tokenizers">
-  <section>
     <h2>Tokenizers in Apache Solr</h2>
     <p>Tokenizers are tools or libraries used in natural language processing (NLP) to break down text into smaller units called tokens. These tokens can be words, subwords, characters, or any other meaningful subunits, depending on the type of tokenizer used.</p>
     <p>Tokenization is an essential step in many NLP tasks, such as text classification, named entity recognition, machine translation, and sentiment analysis. By splitting text into tokens, it becomes easier to process and analyze language data.</p>
@@ -532,6 +530,52 @@
     <p>This example demonstrates how the tokenizer and filters in Solr's text analysis pipeline can transform the input text into meaningful tokens that are suitable for indexing and searching. By configuring different tokenizers and filters based on your specific requirements, you can customize the tokenization process to enhance the search experience and relevance in your Solr application.</p>
   
  </section>
+<section id = "odata">
+  <h3>OData - Open Data Protocol</h3>
+  <p>In simple terms, OData (Open Data Protocol) is a standardized way of structuring and accessing data over the internet. It allows you to query and retrieve data from a server using a standardized set of URLs and HTTP methods.</p>
+  <p>Think of OData as a language that both the client (the one requesting the data) and the server (the one providing the data) understand. It defines a set of rules and conventions for interacting with data resources.</p>
+  <h2>Example:</h2>
+  <p>Let's say you have a server that provides information about books. The server has a collection of books, and each book has properties like title, author, and publication year.</p>
+  <p>To retrieve information about all the books using OData, you would send an HTTP GET request to the server's API endpoint, something like:</p>
+  <pre><code>GET https://example.com/books</code></pre>
+  <p>The server would respond with a list of books in a standardized format, such as JSON:</p>
+  <pre><code>{
+  "value": [
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "publicationYear": 1925
+    },
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "publicationYear": 1960
+    },
+    ...
+  ]
+}</code></pre>
+  <p>Now, let's say you want to retrieve only the books published after the year 2000. With OData, you can refine your request by adding query parameters:</p>
+  <pre><code>GET https://example.com/books?$filter=publicationYear gt 2000</code></pre>
+  <p>The server would then respond with a filtered list of books that match your query:</p>
+  <pre><code>{
+  "value": [
+    {
+      "title": "The Hunger Games",
+      "author": "Suzanne Collins",
+      "publicationYear": 2008
+    },
+    {
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "publicationYear": 1997
+    },
+    ...
+  ]
+}</code></pre>
+  <p>This is just a basic example, but OData supports more advanced querying capabilities, sorting, filtering, pagination, and more.</p>
+  <p>In summary, OData provides a standardized way to access and manipulate data over the web, allowing clients and servers to communicate efficiently and consistently.</p>
+
+</section>
 </main>
 
 <footer>
