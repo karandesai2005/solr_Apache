@@ -76,26 +76,26 @@
     }
 
     /* Responsive styles */
-    @media only screen and (max-width: 600px) {
-      /* Adjust header */
-      header {
-        padding: 10px;
-      }
-
-      /* Make nav vertical */
+   
+    @media screen and (max-width: 768px) {
       nav ul li {
         display: block;
-        margin-bottom: 10px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      header h1 {
+        font-size: 24px;
       }
 
-      /* Adjust main content padding */
-      main {
-        padding: 10px;
+      nav ul {
+        display: none;
       }
 
-      /* Reduce footer font size */
-      footer {
-        font-size: 12px;
+      .top-arrow {
+        font-size: 18px;
+        bottom: 10px;
+        right: 10px;
       }
     }
   </style>
